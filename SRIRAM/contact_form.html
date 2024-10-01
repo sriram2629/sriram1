@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="form-container">
+        <h1>Contact Us</h1>
+        <form id="contactForm" onsubmit="return handleSubmit(event)">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <span id="nameError" class="error"></span>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <span id="emailError" class="error"></span>
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea>
+            <span id="messageError" class="error"></span>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            let valid = true;
+
+            // Name validation
+            let name = document.getElementById('name').value;
+            let nameError = document.getElementById('nameError');
+            if (name === "") {
+                nameError.textContent = "Name is required.";
+                valid = false;
+            } else {
+                nameError.textContent = "";
+            }
+
+            // Email validation
+            let email = document.getElementById('email').value;
+            let emailError = document.getElementById('emailError');
+            let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+            if (!email.match(emailPattern)) {
+                emailError.textContent = "Please enter a valid email address.";
+                valid = false;
+            } else {
+                emailError.textContent = "";
+            }
+
+            // Message validation
+            let message = document.getElementById('message').value;
+            let messageError = document.getElementById('messageError');
+            if (message === "") {
+                messageError.textContent = "Message is required.";
+                valid = false;
+            } else {
+                messageError.textContent = "";
+            }
+
+            return valid;
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            if (validateForm()) {
+                // Redirect to a new page after successful submission
+                window.location.href = "success.html";
+            }
+        }
+    </script>
+
+</body>
+</html>
